@@ -1,10 +1,11 @@
-import { ExecutorView } from '@/components'
-import { NextPage } from 'next'
+import {ExecutorView} from '@/components'
+import {NextPage} from 'next'
 
-interface Props { }
+interface Props {
+}
 
-const Page: NextPage<Props> = ({ }) => {
-    return <ExecutorView />
+const Page: NextPage<Props> = ({}) => {
+  return <ExecutorView/>
 
 }
 
