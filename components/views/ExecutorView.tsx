@@ -1,14 +1,14 @@
 'use client';
 import React from 'react';
-import { Link } from '@nextui-org/link';
-import { FORMS } from '@/constants';
-import { Table, TableHeader, TableBody, TableColumn, TableRow, TableCell } from "@nextui-org/table";
+import {Link} from '@nextui-org/link';
+import {FORMS} from '@/constants';
+import {Table, TableHeader, TableBody, TableColumn, TableRow, TableCell} from "@nextui-org/table";
 
 interface Props {
 
 }
 
-export const ExecutorView: React.FC<Props> = ({ }) => {
+export const ExecutorView: React.FC<Props> = ({}) => {
     return (
 
         <Table aria-label='Table' className='px-4 py-4'>
