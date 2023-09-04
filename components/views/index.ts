@@ -1,3 +1,4 @@
 import { ExecutorView } from "./ExecutorView";
+import { UserView} from "./UserView";
 
-export { ExecutorView };
+export { ExecutorView, UserView };
