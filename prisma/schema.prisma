@@ -1,0 +1,110 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         String       @id @default(uuid())
+  email      String       @unique
+  name       String?
+  password   String
+  role       Role?        @relation(fields: [roleId], references: [id])
+  job        Job          @relation(fields: [jobId], references: [id])
+  jobId      String
+  roleId     String?
+  reportUser ReportUser[]
+}
+
+model Job {
+  id    String @id @default(uuid())
+  title String
+  name  String
+  user  User[]
+}
+
+model Role {
+  id   String @id @default(uuid())
+  name String @unique
+  user User[]
+}
+
+model Project {
+  id          String        @id @default(uuid())
+  title       String
+  name        String
+  dailyReport Dailyreport[]
+}
+
+model Dailyreport {
+  id                   String                 @id @default(uuid())
+  name                 String
+  date                 DateTime
+  project              Project                @relation(fields: [projectId], references: [id])
+  projectId            String
+  ActivityReport       ActivityReport[]
+  DailyreportAsistence DailyreportAsistence[]
+  ReportUser           ReportUser[]
+}
+
+model ReportUser {
+  user          User        @relation(fields: [userId], references: [id])
+  userId        String
+  dailyReportId String
+  dailyReport   Dailyreport @relation(fields: [dailyReportId], references: [id])
+
+  @@id([userId, dailyReportId])
+}
+
+model Hour {
+  id              String            @id @default(uuid())
+  hour            String
+  ActivityReport  ActivityReport[]
+  InferenceReport InferenceReport[]
+}
+
+model ActivityReport {
+  id            String      @id @default(uuid())
+  hourId        String
+  hour          Hour        @relation(fields: [hourId], references: [id])
+  dailyReportId String
+  dailyReport   Dailyreport @relation(fields: [dailyReportId], references: [id])
+  name          String
+}
+
+model Inferencetype {
+  id   String @id @default(uuid())
+  name String
+
+  Inference Inference[]
+}
+
+model Inference {
+  id              String            @id @default(uuid())
+  inferenceTypeId String
+  inferenceType   Inferencetype     @relation(fields: [inferenceTypeId], references: [id])
+  name            String
+  InferenceReport InferenceReport[]
+}
+
+model InferenceReport {
+  id            String    @id @default(uuid())
+  inferenceId   String
+  inference     Inference @relation(fields: [inferenceId], references: [id])
+  hourId        String
+  hour          Hour      @relation(fields: [hourId], references: [id])
+  dailyReportId String
+  name          String
+}
+
+model DailyreportAsistence {
+  id            String      @id @default(uuid())
+  dailyReportId String
+  dailyReport   Dailyreport @relation(fields: [dailyReportId], references: [id])
+}
