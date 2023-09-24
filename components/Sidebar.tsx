@@ -1,11 +1,9 @@
 import React from 'react';
 import { Image } from "@nextui-org/image";
-import { Link } from '@nextui-org/link';
 import { APP_ICON_IMAGE } from '@/constants';
 import { FaUserAlt } from 'react-icons/fa';
 import { AiFillSetting } from 'react-icons/ai';
 import { FaWpforms } from 'react-icons/fa';
-import { Button } from '@nextui-org/button';
 import {SidebarItem} from "@/components/SidebarItem";
 
 interface SidebarElement {
