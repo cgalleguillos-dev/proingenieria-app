@@ -18,7 +18,7 @@ const sidebarElements: SidebarElement[] = [
         icon: <FaWpforms className='inline-block'/>
     },
     {
-        href: '/auth/user',
+        href: '/user',
         detail: 'Usuarios',
         icon: <FaUserAlt className='inline-block' />
     },
