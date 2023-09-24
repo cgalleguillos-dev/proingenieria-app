@@ -13,6 +13,9 @@ import {IoIosAddCircle} from 'react-icons/io';
 import {TiDelete} from 'react-icons/ti';
 import {Activity, InferenceFormInput, PersonalFormDateInput} from "@/config/interfaces";
 import {Chip} from "@nextui-org/chip";
+import {hoursBetween} from "@/utils";
+import {HoursTable} from "@/components/common/HoursTable";
+import {PersonalTable} from "@/components/common/PersonalTable";
 
 
 const Page = ({params: {id}}: { params: { id: string } }) => {
@@ -49,170 +52,18 @@ const Page = ({params: {id}}: { params: { id: string } }) => {
     setInferences(newInferences);
   };
 
-  const hoursBetween = (initDate: string, endDate: string) => {
-    const initDateSplit = initDate.split(":");
-    const endDateSplit = endDate.split(":");
-    const initDateHour = parseInt(initDateSplit[0]);
-    const initDateMinutes = parseInt(initDateSplit[1]);
-    const endDateHour = parseInt(endDateSplit[0]);
-    const endDateMinutes = parseInt(endDateSplit[1]);
-    const hours = endDateHour - initDateHour;
-    const minutes = endDateMinutes - initDateMinutes;
-    return hours + minutes / 60;
-  };
-
 
   return (<div className="flex flex-col items-center justify-center">
       <Accordion defaultExpandedKeys={["1"]}>
         <AccordionItem key="1" aria-label="REPORTE DE PERSONAL" title="REPORTE DE PERSONAL"
                        className="w-full px-4 py-4 text-2xl font-bold"
         >
-          <div className="
-                    flex flex-row">
-            <Table isHeaderSticky isCompact isVirtualized aria-label="REPORTE DE PERSONAL" className="px-4 py-4"
-                   bottomContent={<div className="flex flex-row  w-full">
-                     <div className="text-center text-sm  px-0  h-full font-normal w-1/3">
-                       <p> Horas efectivas de Buceo</p>
-                     </div>
-                     <div className="flex flex-row h-full w-full ">
-
-                       <div className="w-1/2 h-full">
-                         {personalDateInput.initDateAM && personalDateInput.endDateAM &&
-                             <p className="text-center text-sm  items-center justify-center font-normal">
-                               {hoursBetween(personalDateInput.initDateAM, personalDateInput.endDateAM)}
-                             </p>}
-                       </div>
-                       <div className="w-1/2 h-full">
-                         {personalDateInput.initDatePM && personalDateInput.endDatePM &&
-                             <p className="text-center text-sm  font-normal">
-                               {hoursBetween(personalDateInput.initDatePM, personalDateInput.endDatePM)}
-                             </p>}
-                       </div>
-                     </div>
-                   </div>}
-            >
-              <TableHeader>
-                <TableColumn align="center">
-                  <p className="text-center">Detalle</p>
-                </TableColumn>
-                <TableColumn align="center">
-                  <p className="text-center">AM</p>
-                </TableColumn>
-                <TableColumn align="center">
-                  <p className="text-center">PM</p>
-                </TableColumn>
-              </TableHeader>
-              <TableBody emptyContent={"No hay personal"}>
-                <TableRow key="1" className="">
-                  <TableCell className="w-1/6 px-0">
-                    <p className="text-center">Hora Inicio de Buceo</p>
-                  </TableCell>
-                  <TableCell className="w-1/4 pr-0">
-                    <Select
-                      size="sm"
-                      variant="bordered"
-                      className="w-full"
-                      placeholder="Hora"
-                      onChange={(e) => setPersonalDateInput({...personalDateInput, initDateAM: e.target.value})}
-                      value={personalDateInput.initDateAM}
-                    >
-                      {timeOptionsAM.map((time, index) => (
-                        <SelectItem key={time} textValue={time}>{time}</SelectItem>))}
-                    </Select>
-                  </TableCell>
-                  <TableCell className="w-1/4 pr-0">
-                    <Select
-                      size="sm"
-                      variant="bordered"
-                      className="w-full"
-                      placeholder="Hora"
-                      onChange={(e) => setPersonalDateInput({...personalDateInput, initDatePM: e.target.value})}
-                    >
-                      {timeOptionsPM.map((time, index) => (<SelectItem key={time} value={time}>{time}</SelectItem>))}
-                    </Select>
-                  </TableCell>
-                </TableRow>
-                <TableRow key="2" className="">
-                  <TableCell className="w-1/6 px-0">
-                    <p className="text-center">Hora Termino de Buceo</p>
-                  </TableCell>
-                  <TableCell className="w-1/4 pr-0">
-                    <Select
-                      size="sm"
-                      variant="bordered"
-                      className="w-full"
-                      placeholder="Hora"
-                      onChange={(e) => setPersonalDateInput({...personalDateInput, endDateAM: e.target.value})}
-                    >
-                      {timeOptionsAM.map((time, index) => (<SelectItem key={time} value={time}>{time}</SelectItem>
-
-                      ))}
-                    </Select>
-                  </TableCell>
-                  <TableCell className="w-1/4 pr-0">
-                    <Select
-                      size="sm"
-                      variant="bordered"
-                      className="w-full"
-                      placeholder="Hora"
-                      onChange={(e) => setPersonalDateInput({...personalDateInput, endDatePM: e.target.value})}
-                      value={personalDateInput.endDatePM}
-                    >
-                      {timeOptionsPM.map((time, index) => (<SelectItem key={time} value={time}>{time}</SelectItem>))}
-                    </Select>
-                  </TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-
-            <Table isHeaderSticky isCompact isVirtualized aria-label="REPORTE DE PERSONAL" className="px-4 py-4"
-                   bottomContent={<div className="flex flex-row">
-                     <div className="text-left text-sm  px-0  h-full font-normal w-1/4">
-                       <p> Dotación Total</p>
-                     </div>
-                   </div>}
-            >
-              <TableHeader>
-                <TableColumn align="center">
-                  <p className="text-center">
-                    PERSONAL
-                  </p>
-                </TableColumn>
-              </TableHeader>
-              <TableBody items={PersonalOptions} emptyContent={"No hay personal"}>
-                {PersonalOptions.map((personal, index) => (<TableRow key={index} className="">
-                    <TableCell className="w-1/6 px-0">
-                      <div className="flex flex-row items-center justify-between">
-                        <p className="text-left w-1/2">{personal.personal}</p>
-                        <Select
-                          items={getUsersByJob(personal.role).map((user, index) => ({
-                              key: user.id,
-                              data: {name: user.name}
-                            }))}
-                          size="sm"
-                          variant="bordered"
-                          isMultiline={true}
-                          selectionMode="multiple"
-                          className="w-full"
-                          placeholder="Personal"
-                          onChange={(e) => setPersonalDateInput({...personalDateInput, initDateAM: e.target.value})}
-                          // value={personalDateInput.initDateAM}
-                          renderValue={(items) => {
-                            return (<div className="flex flex-wrap gap-2">
-                                {items.map((item) => (
-                                  <Chip color="primary" variant="dot" key={item.key}>{item.data?.data.name}</Chip>))}
-                              </div>);
-                          }}
-                        >
-                          {(user) => (<SelectItem key={user.key} value={user.key}>{user.data.name}</SelectItem>)}
-                        </Select>
-
-                      </div>
-
-                    </TableCell>
-                  </TableRow>))}
-              </TableBody>
-            </Table>
+          <div className="flex flex-row">
+            <HoursTable
+              personalDateInput={personalDateInput}
+              setPersonalDateInput={setPersonalDateInput}
+            />
+            <PersonalTable />
           </div>
         </AccordionItem>
         <AccordionItem key="2" aria-label="REPORTE DE ACTIVIDADES" title="REPORTE DE ACTIVIDADES"
@@ -370,9 +221,8 @@ const Page = ({params: {id}}: { params: { id: string } }) => {
                   </TableCell>
                   <TableCell className="w-3/6">
                     <p className="text-center">
-                      {//find inference in INFERENCE array by id and show type
+                      {
                         INFERENCES.find((inf) => inf.id - 1 === parseInt(inference.idInference)) ? INFERENCES.find((inf) => inf.id - 1 === parseInt(inference.idInference))?.type : "Selecciona"
-
                       }
                     </p>
                   </TableCell>
