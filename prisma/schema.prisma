@@ -13,7 +13,9 @@ datasource db {
 model User {
   id         String       @id @default(uuid())
   email      String       @unique
-  name       String?
+  name       String
+  fullName   String?
+  rut        String?
   password   String
   role       Role?        @relation(fields: [roleId], references: [id])
   job        Job          @relation(fields: [jobId], references: [id])
@@ -37,6 +39,7 @@ model Role {
 model Project {
   id          String        @id @default(uuid())
   name        String
+  isComplete  Boolean       @default(false)
   dailyReport Dailyreport[]
 }
 
@@ -49,6 +52,8 @@ model Dailyreport {
   ActivityReport       ActivityReport[]
   DailyreportAsistence DailyreportAsistence[]
   ReportUser           ReportUser[]
+  isComplete           Boolean                @default(false)
+  isApproved           Boolean                @default(false)
 }
 
 model ReportUser {
