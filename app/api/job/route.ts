@@ -7,7 +7,6 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
     data: {
       name: name,
     },
-
   });
   return NextResponse.json(job);
 };
