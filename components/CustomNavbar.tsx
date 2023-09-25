@@ -16,7 +16,7 @@ export const CustomNavbar: React.FC<Props> = ({ }) => {
                 </NavbarBrand>
             </NavbarContent>
             <NavbarContent as="div" className="items-center" justify="end">
-                <UserInfo name={'Admin'} email={'Admin@Admin'} />
+                <UserInfo/>
             </NavbarContent>
             <ThemeSwitcher />
         </Navbar>
