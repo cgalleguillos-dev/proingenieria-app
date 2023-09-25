@@ -1,7 +1,6 @@
 'use client';
 import React from 'react';
 import {Table, TableBody, TableCell, TableColumn, TableHeader, TableRow} from "@nextui-org/table";
-import { users} from "@/constants";
 import {User} from "@/config/interfaces";
 
 const columns = [
