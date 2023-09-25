@@ -6,11 +6,13 @@ import {Button} from "@nextui-org/button";
 import {APP_ICON_IMAGE} from "@/constants";
 import {Image} from "@nextui-org/image";
 import { useRouter } from 'next/navigation';
+import { signIn } from "next-auth/react";
 interface Props {
 }
 
 export const LoginForm: React.FC<Props> = ({}) => {
   const router = useRouter();
+  const [error, setError] = React.useState<string>('');
   const [userInput, setUserInput] = React.useState<UserLoginInput>({
     email: '',
     password: ''
@@ -23,20 +25,26 @@ export const LoginForm: React.FC<Props> = ({}) => {
   }
 
   const handleSubmit = async () => {
-    const userResponse = await fetch('/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(userInput)
-    })
-    if (userResponse.ok) {
-      router.push('/')
+    const res = await signIn('credentials', {
+      redirect: false,
+      email: userInput.email,
+      password: userInput.password
+    });
+    if (res?.error) {
+      setError(res.error);
+      setTimeout(() => {
+        setError('');
+      }, 3000);
     }
+    if (res?.ok) return router.push('/');
+
   }
   return (
     <div className='flex flex-row items-center justify-center w-full h-screen p-8'>
       <Card className='md:w-1/3 xl:w-1/3 2xl:w-1/5 flex flex-colitems-center justify-center'>
+        {
+          error && <div className="bg-red-500 text-white p-2 mb-2 text-center">{'Credenciales inválidas'}</div>
+        }
         <CardHeader className='text-center
           flex flex-col'>
           <Image src={APP_ICON_IMAGE} width={200} height={200} className='mx-auto p-4' alt='ProIngenieria' />
@@ -84,7 +92,6 @@ export const LoginForm: React.FC<Props> = ({}) => {
 
         </CardBody>
         <CardFooter className='flex flex-col items-center justify-center w-full h-full p-4'>
-          <p className='text-sm'>¿No tienes una cuenta? <a href='/register' className='text-blue-500'>Regístrate</a></p>
         </CardFooter>
       </Card>
     </div>
