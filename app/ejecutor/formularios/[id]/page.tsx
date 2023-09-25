@@ -54,7 +54,7 @@ const Page = ({params: {id}}: { params: { id: string } }) => {
 
 
   return (<div className="flex flex-col items-center justify-center">
-      <Accordion defaultExpandedKeys={["1"]}>
+      <Accordion defaultExpandedKeys={["1"]} aria-label={"REPORTE DE PERSONAL, REPORTE DE ACTIVIDADES, REPORTE DE INFERENCIAS"}>
         <AccordionItem key="1" aria-label="REPORTE DE PERSONAL" title="REPORTE DE PERSONAL"
                        className="w-full px-4 py-4 text-2xl font-bold"
         >

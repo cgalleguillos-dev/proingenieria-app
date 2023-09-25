@@ -9,7 +9,9 @@ export function middleware(req: NextRequest) {
     }
 
     else if (req.nextUrl.pathname.startsWith('/login') && authTokens) {
-        const res = NextResponse.redirect(new URL('/home', req.url));
+        const res = NextResponse.redirect(new URL('/', req.url));
+        console.log('' +
+          'Redirecting to /home');
         return res;
     }
 
@@ -17,5 +19,5 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-    matcher: ['/home', '/login']
+    matcher: ['/home', '/login', '/form', '/user', '/executor'],
 }

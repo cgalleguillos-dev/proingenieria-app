@@ -50,7 +50,7 @@ export const HoursTable: React.FC<Props> = ({personalDateInput, setPersonalDateI
                </div>
              </div>}
       >
-        <TableHeader columns={columns}>
+        <TableHeader columns={columns} aria-label={'Header'}>
           {
             ((columns) => <TableColumn key={columns.key}>{columns.label}</TableColumn>)
           }

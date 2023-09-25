@@ -1,9 +1,8 @@
 import { NextResponse, NextRequest } from "next/server";
 import jwt from "jsonwebtoken";
-import { prisma } from "../prismaClient";
-import Cookies from 'js-cookie';
+import prisma from "@/app/api/prismaClient";
 import { comparePassword } from "@/lib";
-
+import { cookies } from 'next/headers';
 export const POST = async (req: NextRequest, res: NextResponse) => {
     const { email, password } = await req.json();
     const user = await prisma.user.findUnique({
@@ -12,11 +11,17 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
         },
     });
     if (!user) {
-        return NextResponse.next();
+        return NextResponse.json(
+            { message: "User not found" },
+            { status: 404 }
+        )
     }
-    const valid = await comparePassword(user.password, password);
+    const valid = await comparePassword(password, user.password);
     if (!valid) {
-        return NextResponse.next();
+        return NextResponse.json(
+            { message: "Invalid password" },
+            { status: 401 }
+        )
     }
 
     const token = jwt.sign(
@@ -24,8 +29,9 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
         process.env.JWT_SECRET!,
         { expiresIn: "1h" }
     );
-    Cookies.set("authTokens", token);
-
-    return NextResponse.json({ message: "success" }, { status: 200 });
-
+    cookies().set('authTokens', token, { sameSite: 'strict', httpOnly: true, maxAge: 60 * 60 * 24 });
+    return new NextResponse(JSON.stringify({ token }),{
+            status: 200
+        }
+    );
 };

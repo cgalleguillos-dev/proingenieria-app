@@ -40,7 +40,7 @@ export const Sidebar: React.FC<Props> = ({ }) => {
             <div className='flex flex-col p-2'>
                 {
                     sidebarElements.map((element, index) => {
-                        return <SidebarItem href={element.href} detail={element.detail} icon={element.icon} />
+                        return  <SidebarItem href={element.href} detail={element.detail} icon={element.icon} key={index} />
                     })
                 }
             </div>

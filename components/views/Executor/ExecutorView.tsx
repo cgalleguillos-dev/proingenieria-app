@@ -12,16 +12,16 @@ export const ExecutorView: React.FC<Props> = ({}) => {
     return (
 
         <Table aria-label='Table' className='px-4 py-4'>
-            <TableHeader>
+            <TableHeader aria-label={'header'}>
                 <TableColumn align='center'>DESCRIPCIÓN</TableColumn>
                 <TableColumn align='center'>FECHA</TableColumn>
                 <TableColumn align='center'>REALIZADO</TableColumn>
             </TableHeader>
-            <TableBody>
+            <TableBody aria-label={'body'}>
                 {
                     FORMS.map((FORMS, index) => {
                         return (
-                            <TableRow key={index}>
+                            <TableRow key={index} aria-label={'row'}>
                                 <TableCell align='center'>
                                     <Link href={`/ejecutor/formularios/${FORMS.id}`}>
                                         <p className='inline-block ml-2 font-semibold'>{FORMS.name}</p>

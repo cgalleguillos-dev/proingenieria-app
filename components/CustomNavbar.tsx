@@ -1,6 +1,5 @@
 import React from "react";
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from "@nextui-org/navbar";
-import { Link } from "@nextui-org/link";
+import { Navbar, NavbarBrand, NavbarContent } from "@nextui-org/navbar";
 import { ThemeSwitcher } from "@/components";
 import {UserInfo} from "@/components/UserInfo";
 
