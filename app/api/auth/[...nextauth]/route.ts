@@ -2,6 +2,7 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import prisma from "@/app/api/prismaClient";
 import { comparePassword } from "@/lib";
+import {User} from "@/config/interfaces";
 
 const handler = NextAuth({
   providers: [
@@ -16,6 +17,10 @@ const handler = NextAuth({
         const user = await prisma.user.findUnique({
           where: {
             email: credentials?.email,
+          },
+          include: {
+            role: true,
+            job: true,
           }
         });
         if (!user) {
@@ -42,7 +47,7 @@ const handler = NextAuth({
       return token;
     },
     async session({session, token}) {
-      session.user = token.user as any;
+      session.user = token.user as User;
       return session;
     }
   }

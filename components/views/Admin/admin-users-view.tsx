@@ -1,13 +1,9 @@
 'use client';
 import React from 'react';
 import {Table, TableBody, TableCell, TableColumn, TableHeader, TableRow} from "@nextui-org/table";
-import { users} from "@/constants";
+import {User} from "@/config/interfaces";
 
 const columns = [
-  {
-    key: 'id',
-    label: 'ID',
-  },
   {
     key: 'name',
     label: 'Name',
@@ -30,18 +26,20 @@ const columns = [
   }
 ]
 
-const rows = users.map((user) => ({
-  id: user.id,
-  name: user.name,
-  rut: user.rut,
-  email: user.email,
-  job: user.job.name,
-  role: user.role?.name
-}));
 interface Props {
+  users: User[];
 }
 
-export const UserView: React.FC<Props> = ({}) => {
+export const AdminUsersView: React.FC<Props> = ({users}) => {
+    const rows = users.map((user) => ({
+      id: user.id,
+      name: user.name,
+      rut: user.rut,
+      email: user.email,
+      job: user.job.name,
+      role: user.role?.name || 'Sin rol definido',
+    }));
+
     return (
         <div className='px-4 py-4 flex flex-col'>
           <Table aria-label="Example static collection table">
@@ -54,7 +52,6 @@ export const UserView: React.FC<Props> = ({}) => {
               {
                 (item) => (
                   <TableRow key={item.id}>
-                    <TableCell>{item.id}</TableCell>
                     <TableCell>{item.name}</TableCell>
                     <TableCell>{item.rut}</TableCell>
                     <TableCell>{item.email}</TableCell>

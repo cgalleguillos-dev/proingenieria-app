@@ -61,3 +61,24 @@ export interface User {
     job: Job;
     role?: Role;
 }
+
+
+export interface ReportUser {
+    user: User;
+    dailyReport: DailyReport;
+}
+export interface Project {
+    id: number;
+    name: string;
+    isComplete: boolean;
+}
+
+export interface DailyReport {
+    id: number;
+    name: string;
+    date: string;
+    project: Project;
+    reportUser: ReportUser[];
+    isApproved: boolean;
+    isComplete: boolean;
+}
