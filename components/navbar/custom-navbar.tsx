@@ -1,7 +1,7 @@
 import React from "react";
 import { Navbar, NavbarBrand, NavbarContent } from "@nextui-org/navbar";
 import { ThemeSwitcher } from "@/components";
-import {UserInfo} from "@/components/UserInfo";
+import {NavbarUserInfo} from "@/components/navbar/navbar-user-info";
 
 interface Props {
 
@@ -16,7 +16,7 @@ export const CustomNavbar: React.FC<Props> = ({ }) => {
                 </NavbarBrand>
             </NavbarContent>
             <NavbarContent as="div" className="items-center" justify="end">
-                <UserInfo/>
+                <NavbarUserInfo/>
             </NavbarContent>
             <ThemeSwitcher />
         </Navbar>

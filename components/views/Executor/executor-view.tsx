@@ -3,6 +3,7 @@ import React from 'react';
 import {Link} from '@nextui-org/link';
 import {FORMS} from '@/constants';
 import {Table, TableHeader, TableBody, TableColumn, TableRow, TableCell} from "@nextui-org/table";
+import NextLink from "next/link";
 
 interface Props {
 
@@ -10,7 +11,6 @@ interface Props {
 
 export const ExecutorView: React.FC<Props> = ({}) => {
     return (
-
         <Table aria-label='Table' className='px-4 py-4'>
             <TableHeader aria-label={'header'}>
                 <TableColumn align='center'>DESCRIPCIÓN</TableColumn>
@@ -23,7 +23,7 @@ export const ExecutorView: React.FC<Props> = ({}) => {
                         return (
                             <TableRow key={index} aria-label={'row'}>
                                 <TableCell align='center'>
-                                    <Link href={`/ejecutor/formularios/${FORMS.id}`}>
+                                    <Link href={`/ejecutor/formularios/${FORMS.id}`} as={NextLink}>
                                         <p className='inline-block ml-2 font-semibold'>{FORMS.name}</p>
                                     </Link>
                                 </TableCell>

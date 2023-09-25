@@ -14,8 +14,8 @@ import {TiDelete} from 'react-icons/ti';
 import {Activity, InferenceFormInput, PersonalFormDateInput} from "@/config/interfaces";
 import {Chip} from "@nextui-org/chip";
 import {hoursBetween} from "@/utils";
-import {HoursTable} from "@/components/common/HoursTable";
-import {PersonalTable} from "@/components/common/PersonalTable";
+import {HoursTable} from "@/components/common/hours-table";
+import {PersonalTable} from "@/components/common/personal-table";
 
 
 const Page = ({params: {id}}: { params: { id: string } }) => {

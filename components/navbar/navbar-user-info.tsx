@@ -7,7 +7,7 @@ import {  useSession, signOut } from "next-auth/react";
 interface Props {
 }
 
-export const UserInfo: React.FC<Props> = ({}) => {
+export const NavbarUserInfo: React.FC<Props> = ({}) => {
   const router = useRouter();
   const { data: session, status } = useSession();
   const name = session?.user?.name;
@@ -32,11 +32,11 @@ export const UserInfo: React.FC<Props> = ({}) => {
           />
         </DropdownTrigger>
         <DropdownMenu aria-label="Profile Actions" variant="flat">
-          <DropdownItem key="profile" className="h-14 gap-2">
+          <DropdownItem key="profile-info" className="h-14 gap-2" textValue={'info'}>
             <p className="font-semibold">Hola!! {name}</p>
             <p className="font-semibold">{email}</p>
           </DropdownItem>
-          <DropdownItem key="profile" color="primary">
+          <DropdownItem key="profile-button" color="primary">
             Ver Profile
           </DropdownItem>
           <DropdownItem key="logout" color="danger" onClick={logout}>

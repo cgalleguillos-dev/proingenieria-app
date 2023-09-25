@@ -4,7 +4,7 @@ import { APP_ICON_IMAGE } from '@/constants';
 import { FaUserAlt } from 'react-icons/fa';
 import { AiFillSetting } from 'react-icons/ai';
 import { FaWpforms } from 'react-icons/fa';
-import {SidebarItem} from "@/components/SidebarItem";
+import {SidebarItem} from "@/components/sidebar/sidebar-item";
 
 interface SidebarElement {
     href: string;
