@@ -54,8 +54,8 @@ export interface Role {
 export interface User {
     id: number;
     name: string;
-    fullName: string;
-    rut: string;
+    fullName?: string;
+    rut?: string;
     email: string;
     password: string;
     job: Job;

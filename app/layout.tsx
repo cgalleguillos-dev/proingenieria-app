@@ -1,31 +1,28 @@
+'use client';
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Providers } from './providers'
 import { Sidebar } from '@/components'
-import { CustomNavbar } from '../components/CustomNavbar'
-
+import { CustomNavbar } from '@/components'
+import { usePathname } from 'next/navigation';
 
 const inter = Inter({ subsets: ['latin'] })
-
-export const metadata: Metadata = {
-  title: 'ProIngeniería',
-  description: 'Proyecto para ProIngeniería',
-}
-
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const pathname = usePathname();
+  const showSideBar = pathname !== '/login' && pathname !== '/signup';
+
   return (
     <html lang="en">
       <body>
         <Providers>
-          <Sidebar />
+          {showSideBar && <Sidebar />}
           <div className='w-screen h-screen overflow-x-hidden'>
-            <CustomNavbar />
-
+            {showSideBar && <CustomNavbar />}
             {children}
           </div>
         </Providers>

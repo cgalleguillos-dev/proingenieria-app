@@ -4,7 +4,7 @@ import {Link} from "@nextui-org/link";
 import {FaWpforms} from "react-icons/fa";
 
 interface Props {
-    key?: string;
+    key?: number;
     href: string;
     detail: string;
     icon?: React.ReactNode;
