@@ -2,19 +2,19 @@
 import React from 'react';
 import {Dropdown, DropdownItem, DropdownMenu, DropdownTrigger} from "@nextui-org/dropdown";
 import {Avatar} from "@nextui-org/avatar";
-import {useRouter} from "next/navigation";
 import {  useSession, signOut } from "next-auth/react";
 interface Props {
 }
 
 export const NavbarUserInfo: React.FC<Props> = ({}) => {
-  const router = useRouter();
   const { data: session, status } = useSession();
   const name = session?.user?.name;
   const email = session?.user?.email;
   const logout = async () => {
-    signOut();
-    return router.push('/login');
+    await signOut({
+      redirect: true,
+      callbackUrl: '/login',
+    });
   }
 
   return (
