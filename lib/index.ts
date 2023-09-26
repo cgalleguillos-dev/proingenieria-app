@@ -1,6 +1,5 @@
 import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
-import {options} from "preact";
 export const comparePassword = async (
     password: string,
     receivedPassword: string
