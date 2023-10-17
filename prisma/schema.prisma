@@ -22,12 +22,13 @@ model User {
   jobId      String
   roleId     String?
   reportUser ReportUser[]
+  dailyReportAsistence DailyreportAsistence[]
 }
 
 model Job {
-  id    String @id @default(uuid())
-  name  String
-  user  User[]
+  id   String @id @default(uuid())
+  name String
+  user User[]
 }
 
 model Role {
@@ -54,6 +55,8 @@ model Dailyreport {
   ReportUser           ReportUser[]
   isComplete           Boolean                @default(false)
   isApproved           Boolean                @default(false)
+  InferenceReport      InferenceReport[]
+  drivingHours         Int                    @default(0)
 }
 
 model ReportUser {
@@ -82,9 +85,8 @@ model ActivityReport {
 }
 
 model Inferencetype {
-  id   String @id @default(uuid())
-  name String
-
+  id        String      @id @default(uuid())
+  name      String
   Inference Inference[]
 }
 
@@ -97,17 +99,21 @@ model Inference {
 }
 
 model InferenceReport {
-  id            String    @id @default(uuid())
+  id            String      @id @default(uuid())
   inferenceId   String
-  inference     Inference @relation(fields: [inferenceId], references: [id])
+  inference     Inference   @relation(fields: [inferenceId], references: [id])
   hourId        String
-  hour          Hour      @relation(fields: [hourId], references: [id])
+  hour          Hour        @relation(fields: [hourId], references: [id])
   dailyReportId String
+  dailyReport   Dailyreport @relation(fields: [dailyReportId], references: [id])
   name          String
 }
 
 model DailyreportAsistence {
-  id            String      @id @default(uuid())
+  user          User        @relation(fields: [userId], references: [id])
+  userId        String
   dailyReportId String
   dailyReport   Dailyreport @relation(fields: [dailyReportId], references: [id])
+
+  @@id([userId, dailyReportId])
 }

@@ -33,40 +33,46 @@ const columns = [
   }
 ]
 export const ExecutorView: React.FC<Props> = ({dailyReports}) => {
-    return (
-        <Table aria-label='Table' className='px-4 py-4'>
-            <TableHeader aria-label={'header'} columns={columns}>
-              {(column) => (
-                <TableColumn key={column.key}>
-                  {column.title}
-                </TableColumn>
-              )}
-            </TableHeader>
-            <TableBody aria-label={'body'} items={dailyReports}>
-                {
-                  dailyReports.map((dp, index) => {
-                        return (
-                            <TableRow key={index} aria-label={'row'}>
-                                <TableCell align='center'>
-                                    <Link href={`/ejecutor/formularios/${dp.id}`} as={NextLink}>
-                                        <p className='inline-block ml-2 font-semibold'>{dp.name}</p>
-                                    </Link>
-                                </TableCell>
-                                <TableCell align='center'>
-                                    <p className='inline-block ml-2 font-semibold'>{
-                                        new Date(dp.date).toLocaleDateString()
-                                    }</p>
-                                </TableCell>
-                                <TableCell align='center'>
-                                    <p className='inline-block ml-2 font-semibold'>{dp.isComplete ?
-                                        'Realizado' : 'No realizado'
-                                    }</p>
-                                </TableCell>
-                            </TableRow>
-                        )
-                    })
-                }
-            </TableBody>
-        </Table>
-    );
+  const getHref = (id: string, isComplete: boolean) => {
+    if (!isComplete) {
+      return `/ejecutor/formularios/${id}`
+    }
+    return `/reportes/${id}`
+  }
+  return (
+      <Table aria-label='Table' className='px-4 py-4'>
+          <TableHeader aria-label={'header'} columns={columns}>
+            {(column) => (
+              <TableColumn key={column.key}>
+                {column.title}
+              </TableColumn>
+            )}
+          </TableHeader>
+          <TableBody aria-label={'body'} items={dailyReports}>
+              {
+                dailyReports.map((dp, index) => {
+                      return (
+                          <TableRow key={index} aria-label={'row'}>
+                              <TableCell align='center'>
+                                  <Link href={getHref(dp.id, dp.isComplete)} as={NextLink}>
+                                      <p className='inline-block ml-2 font-semibold'>{dp.name}</p>
+                                  </Link>
+                              </TableCell>
+                              <TableCell align='center'>
+                                  <p className='inline-block ml-2 font-semibold'>{
+                                      new Date(dp.date).toLocaleDateString()
+                                  }</p>
+                              </TableCell>
+                              <TableCell align='center'>
+                                  <p className='inline-block ml-2 font-semibold'>{dp.isComplete ?
+                                      'Realizado' : 'No realizado'
+                                  }</p>
+                              </TableCell>
+                          </TableRow>
+                      )
+                  })
+              }
+          </TableBody>
+      </Table>
+  );
 };

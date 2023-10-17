@@ -1,35 +1,8 @@
-import { Activity, Form, Inference, WorkingHour, User, Job, Role, PersonalOptionsInterface } from '@/config/interfaces';
+import {Activity, Form, Inference, Job, PersonalOptionsInterface, Role, User} from '@/config/interfaces';
 import APP_ICON from '../assets/proIngenieriaIcon.png';
 
 export const APP_NAME = 'ProIngenieria';
 export const APP_ICON_IMAGE = APP_ICON.src;
-
-export const FORMS: Form[] = [
-    {
-        id: 1,
-        name: 'Formulario de Inscripción 1',
-        dateOfExpiry: new Date('2021-01-01'),
-        done: false,
-    },
-    {
-        id: 2,
-        name: 'Formulario de Inscripción 2',
-        dateOfExpiry: new Date('2021-01-01'),
-        done: false,
-    },
-    {
-        id: 3,
-        name: 'Formulario de Inscripción 3',
-        dateOfExpiry: new Date('2021-01-01'),
-        done: true,
-    },
-    {
-        id: 4,
-        name: 'Formulario de Inscripción 4',
-        dateOfExpiry: new Date('2021-01-01'),
-        done: false,
-    }
-]
 
 export const INFERENCES: Inference[] = [
     { id: 1, description: "Permisos de Buceo", type: "Directa" },
@@ -68,10 +41,6 @@ export const generateTimeOptions = (): string[] => {
     return timeOptions;
 };
 
-export const timeOptionsAM: string[] = generateTimeOptions().slice(0, 12);
-
-export const timeOptionsPM: string[] = generateTimeOptions().slice(12, 20);
-
 export const FormActivity: Activity[] = [
     { id: 0, time: "08:00", description: "" },
     { id: 1, time: "08:30", description: "" },
@@ -101,33 +70,28 @@ export const PersonalOptions: PersonalOptionsInterface[] = [
     {
         id: 1,
         personal: 'Supervisor Buceo',
-        role: 'Supervisor',
+        job: 'Gerente General',
     },
     {
         id: 2,
         personal: 'Buzo Comercial',
-        role: 'Mantenedor Marítimo',
+        job: 'Mantenedor Marítimo',
     },
     {
         id: 3,
         personal: 'Operarios',
-        role: 'Jefe de Proyecto',
+        job: 'Jefe de Proyecto',
     },
     {
         id: 4,
         personal: 'Ingeniero',
-        role: 'Mantenedor Marítimo',
+        job: 'Mantenedor Marítimo',
     },
     {
         id: 5,
         personal: 'Otros',
-        role: 'Líder de Grupo',
+        job: 'Líder de Grupo',
     }
-];
-
-export const BuceoOptions: string[] = [
-    'Horas Inicio de Buceo',
-    'Hora Termino de Buceo',
 ];
 
 export const jobs: Job[] = [
@@ -140,183 +104,9 @@ export const jobs: Job[] = [
     { id: 7, name: "Mantenedor Marítimo" },
 ];
 
-const roles: Role[] = [
-    { id: 1, name: "Administrador" },
-    { id: 2, name: "Visador" },
-    { id: 3, name: "Ejecutor" },
-];
-
-export const users: User[] = [
-    {
-        id: 1,
-        name: "gerente_general",
-        fullName: "Gerente General",
-        rut: "11111111-1",
-        email: "gerente_general@example.com",
-        password: "password123",
-        job: jobs[0],
-        role: roles[0],
-    },
-    {
-        id: 2,
-        name: "gerente_proyectos",
-        fullName: "Gerente de Proyectos",
-        rut: "22222222-2",
-        email: "gerente_proyectos@example.com",
-        password: "password123",
-        job: jobs[3],
-    },
-    {
-        id: 3,
-        name: "gerente_admin",
-        fullName: "Gerente de Administración",
-        rut: "33333333-3",
-        email: "gerente_admin@example.com",
-        password: "password123",
-        job: jobs[2],
-        role: roles[1],
-    },
-    {
-        id: 4,
-        name: "jefe_proyecto1",
-        fullName: "Jefe de Proyecto 1",
-        rut: "44444444-4",
-        email: "jefe_proyecto1@example.com",
-        password: "password123",
-        job: jobs[3],
-        role: roles[2],
-    },
-    {
-        id: 5,
-        name: "jefe_proyecto2",
-        fullName: "Jefe de Proyecto 2",
-        rut: "55555555-5",
-        email: "jefe_proyecto2@example.com",
-        password: "password123",
-        job: jobs[3],
-        role: roles[2],
-    },
-    {
-        id: 6,
-        name: "jefe_proyecto3",
-        fullName: "Jefe de Proyecto 3",
-        rut: "66666666-6",
-        email: "jefe_proyecto3@example.com",
-        password: "password123",
-        job: jobs[3],
-        role: roles[2],
-    },
-    {
-        id: 7,
-        name: "jefe_proyecto4",
-        fullName: "Jefe de Proyecto 4",
-        rut: "77777777-7",
-        email: "jefe_proyecto4@example.com",
-        password: "password123",
-        job: jobs[3],
-        role: roles[2],
-    },
-    {
-        id: 8,
-        name: "supervisor1",
-        fullName: "Supervisor 1",
-        rut: "88888888-8",
-        email: "supervisor1@example.com",
-        password: "password123",
-        job: jobs[4],
-        role: roles[2],
-    },
-    {
-        id: 9,
-        name: "supervisor2",
-        fullName: "Supervisor 2",
-        rut: "99999999-9",
-        email: "supervisor2@example.com",
-        password: "password123",
-        job: jobs[4],
-        role: roles[2],
-    },
-    {
-        id: 10,
-        name: "lider_grupo1",
-        fullName: "Líder de Grupo 1",
-        rut: "10101010-0",
-        email: "lider_grupo1@example.com",
-        password: "password123",
-        job: jobs[5],
-    },
-    {
-        id: 11,
-        name: "lider_grupo2",
-        fullName: "Líder de Grupo 2",
-        rut: "11111111-1",
-        email: "lider_grupo2@example.com",
-        password: "password123",
-        job: jobs[5],
-    },
-    {
-        id: 12,
-        name: "lider_grupo3",
-        fullName: "Líder de Grupo 3",
-        rut: "12121212-1",
-        email: "lider_grupo3@example.com",
-        password: "password123",
-        job: jobs[5],
-    },
-    {
-        id: 13,
-        name: "lider_grupo4",
-        fullName: "Líder de Grupo 4",
-        rut: "13131313-1",
-        email: "lider_grupo4@example.com",
-        password: "password123",
-        job: jobs[5],
-    },
-    {
-        id: 14,
-        name: "mantenedor_maritimo1",
-        fullName: "Mantenedor Marítimo 1",
-        rut: "14141414-1",
-        email: "mantenedor_maritimo1@example.com",
-        password: "password123",
-        job: jobs[6],
-    },
-    {
-        id: 15,
-        name: "mantenedor_maritimo2",
-        fullName: "Mantenedor Marítimo 2",
-        rut: "15151515-1",
-        email: "mantenedor_maritimo2@example.com",
-        password: "password123",
-        job: jobs[6],
-    },
-    {
-        id: 16,
-        name: "mantenedor_maritimo3",
-        fullName: "Mantenedor Marítimo 3",
-        rut: "16161616-1",
-        email: "mantenedor_maritimo3@example.com",
-        password: "password123",
-        job: jobs[6],
-    },
-    {
-        id: 17,
-        name: "mantenedor_maritimo4",
-        fullName: "Mantenedor Marítimo 4",
-        rut: "17171717-1",
-        email: "mantenedor_maritimo4@example.com",
-        password: "password123",
-        job: jobs[6],
-    },
-];
-
-export const getUsersByJob = (jobName: string) => {
+export const getUsersByJob = (jobName: string, users: User[]) => {
     const job = jobs.find(job => job.name === jobName);
     if (!job) return [];
-
-    return users.filter(user => user.job.id === job.id);
+    return users.filter(user => user.job.name === job.name);
+    // return users.filter(user => user.job === job);
 }
-
-
-export const supervisors = getUsersByJob('Supervisor');
-export const divers = getUsersByJob('Mantenedor Marítimo');
