@@ -5,11 +5,6 @@ export interface Form {
     done: boolean;
 }
 
-export interface Inference {
-    id: number;
-    description: string;
-    type: string;
-}
 
 export interface WorkingHour {
     initHour: string;
@@ -38,7 +33,7 @@ export interface InferenceFormInput {
 export interface PersonalOptionsInterface {
     id: number;
     personal: string;
-    role: string;
+    job: string;
 }
 
 export interface Job {
@@ -74,11 +69,54 @@ export interface Project {
 }
 
 export interface DailyReport {
-    id: number;
+    id: string;
     name: string;
     date: string;
     project: Project;
-    reportUser: ReportUser[];
+    ReportUser: ReportUser[];
     isApproved: boolean;
     isComplete: boolean;
+    drivingHours: number;
+    DailyreportAsistence: DailyreportAsistence[];
+    InferenceReport: InferenceReport[];
+    ActivityReport: ActivityReport[];
+
+}
+
+export interface DailyreportAsistence {
+    user: User;
+}
+
+export interface InferenceReport {
+    id: string;
+    inference: Inference;
+    hour: Hour;
+    name: string;
+}
+
+export interface ActivityReport {
+    id: string;
+    hour: Hour;
+    name: string;
+}
+export interface Hour {
+    id: number;
+    hour: string;
+}
+export interface InferenceType {
+    id: string;
+    name: string;
+}
+
+export interface Inference {
+    id: string;
+    name: string;
+    inferenceType: InferenceType;
+}
+
+export interface ActivityReport {
+    id: string;
+    hour: Hour;
+    dailyReport: DailyReport;
+    name: string;
 }

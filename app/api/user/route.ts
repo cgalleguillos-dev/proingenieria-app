@@ -4,7 +4,7 @@ import { hashPassword } from "@/lib";
 
 
 export const POST = async (req: NextRequest, res: NextResponse) => {
-    const { email, name, password, roleId, jobId } = await req.json();
+    const { email, rut, fullName, name, password, roleId, jobId } = await req.json();
     const hashedPassword = await hashPassword(password);
     const user = await prisma.user.create({
         data: {
@@ -13,6 +13,8 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
             password: hashedPassword,
             roleId: roleId,
             jobId: jobId,
+            rut: rut,
+            fullName: fullName
         },
     });
     return NextResponse.json(user);

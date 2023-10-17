@@ -7,6 +7,7 @@ import {APP_ICON_IMAGE} from "@/constants";
 import {Image} from "@nextui-org/image";
 import { useRouter } from 'next/navigation';
 import { signIn } from "next-auth/react";
+import { UserLoginInput } from "@/config/interfaces/input-interfaces";
 interface Props {
 }
 
@@ -36,7 +37,8 @@ export const LoginForm: React.FC<Props> = ({}) => {
         setError('');
       }, 3000);
     }
-    if (res?.ok) return router.push('/');
+    //sort by roles
+    if (res?.ok) return router.push('/ejecutor/formularios');
 
   }
   return (

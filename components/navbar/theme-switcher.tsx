@@ -11,9 +11,9 @@ interface Props {
 }
 
 export const ThemeSwitcher: React.FC<Props> = ({ }) => {
-    const [mounted, setMounted] = useState(false)
-    const [isSelected, setIsSelected] = useState(false)
     const { theme, setTheme } = useTheme()
+    const [mounted, setMounted] = useState(false)
+    const [isSelected, setIsSelected] = useState(theme === 'dark')
     useEffect(() => {
         setMounted(true)
     }, [])
@@ -42,7 +42,7 @@ export const ThemeSwitcher: React.FC<Props> = ({ }) => {
                 defaultSelected
                 size="md"
                 color="primary"
-                startContent={<BiSolidSun />}
+                startContent={<BiSolidSun /> }
                 endContent={<BsFillMoonFill />}
             >
             </Switch>

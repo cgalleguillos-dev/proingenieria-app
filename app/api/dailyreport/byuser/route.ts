@@ -1,6 +1,8 @@
 import { NextResponse, NextRequest } from "next/server";
 import prisma from "@/app/api/prismaClient";
 import {getToken} from "next-auth/jwt";
+
+
 export const GET = async (req: NextRequest) => {
   const secret = process.env.NEXTAUTH_SECRET;
   const payload = await getToken({req, secret});

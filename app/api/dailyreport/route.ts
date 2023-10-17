@@ -27,12 +27,18 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
   const dailyReports = await prisma.dailyreport.findMany(
     {
       include: {
-        project: true,
         ReportUser: {
           include: {
             user: true
           }
-        }
+        },
+        ActivityReport: {
+          include: {
+            hour: true
+          }
+        },
+        DailyreportAsistence: true,
+        InferenceReport: true
       }
     }
   );
